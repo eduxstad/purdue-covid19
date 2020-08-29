@@ -23,15 +23,14 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Download and commit a fresh dashboard image
         run: |
-          wget -O image.jpeg https://i.imgur.com/hNK0Q27.jpeg
-        #  curl https://api.apiflash.com/v1/urltoimage?access_key=${{ secrets.IMAGE_KEY }}&format=png&height=1217&url=https%3A%2F%2Feduxstad.github.io%2Fpurdue-covid19%2F&width=1020 > image.png
+          wget -O image.png https://api.apiflash.com/v1/urltoimage?access_key=${{ secrets.IMAGE_KEY }}&format=png&height=1217&url=https%3A%2F%2Feduxstad.github.io%2Fpurdue-covid19%2F&width=1020
           
       - uses: EndBug/add-and-commit@v4
         with:
           author_name: Erik Duxstad
           author_email: eduxstad@gmail.com
           message: "update image file"
-          add: "image.jpeg"
+          add: "image.png"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
