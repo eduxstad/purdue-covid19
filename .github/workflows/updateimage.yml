@@ -19,11 +19,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
 
       # Runs a set of commands using the runners shell
       - name: Download and commit a fresh dashboard image
+        env:
+          IMAGE_KEY: ${{ secrets.IMAGE_KEY }}
         run: |
-          wget -O image.png https://api.apiflash.com/v1/urltoimage?access_key=${{secrets.IMAGE_KEY}}&format=png&height=1217&url=https%3A%2F%2Feduxstad.github.io%2Fpurdue-covid19%2F&width=1020
+          wget -O image.png https://api.apiflash.com/v1/urltoimage?access_key=$IMAGE_KEY&format=png&height=1217&url=https%3A%2F%2Feduxstad.github.io%2Fpurdue-covid19%2F&width=1020
           
       - uses: EndBug/add-and-commit@v4
         with:
