@@ -1,0 +1,27 @@
+
+name: update image with latest stats
+
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a set of commands using the runners shell
+      - name: Download and commit a fresh dashboard image
+        run: |
+          curl https://api.apiflash.com/v1/urltoimage?access_key=${{ secrets.IMAGE_KEY }}&format=png&height=1217&url=https%3A%2F%2Feduxstad.github.io%2Fpurdue-covid19%2F&width=1020 > image.png
+          git add image.png
+          git commit -m 'update dashboard image'
+          git push origin master
