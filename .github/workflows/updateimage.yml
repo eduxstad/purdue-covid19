@@ -23,7 +23,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Download and commit a fresh dashboard image
         run: |
-          curl https://api.apiflash.com/v1/urltoimage?access_key=${{ secrets.IMAGE_KEY }}&format=png&height=1217&url=https%3A%2F%2Feduxstad.github.io%2Fpurdue-covid19%2F&width=1020 > image.png
+          curl https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80 > image.png
+        #  curl https://api.apiflash.com/v1/urltoimage?access_key=${{ secrets.IMAGE_KEY }}&format=png&height=1217&url=https%3A%2F%2Feduxstad.github.io%2Fpurdue-covid19%2F&width=1020 > image.png
           
       - uses: EndBug/add-and-commit@v4
         with:
