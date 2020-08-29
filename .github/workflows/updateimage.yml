@@ -15,10 +15,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     
-    env:
-      # This is necessary in order to push a commit to the repo
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -28,6 +24,13 @@ jobs:
       - name: Download and commit a fresh dashboard image
         run: |
           curl https://api.apiflash.com/v1/urltoimage?access_key=${{ secrets.IMAGE_KEY }}&format=png&height=1217&url=https%3A%2F%2Feduxstad.github.io%2Fpurdue-covid19%2F&width=1020 > image.png
-          git add image.png
-          git commit -m 'update dashboard image'
-          git push origin master
+          
+      - uses: EndBug/add-and-commit@v4
+        with:
+          author_name: Erik Duxstad
+          author_email: eduxstad@gmail.com
+          message: "update image file"
+          add: "image.png"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
