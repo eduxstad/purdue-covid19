@@ -5,8 +5,12 @@ const express = require('express');
 const app = express();
  
 app.get('/', function (req, res) {
- console.log(req);
- res.send('Hello World')
+ res.send('You seem to be a little lost . . . ');
+});
+
+app.get('/signup', function (req, res) {
+ let email = req.query.email;
+ res.send(email);
 });
 
 console.log("Starting . . .");
