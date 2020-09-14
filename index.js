@@ -9,4 +9,4 @@ app.get('/', function (req, res) {
 });
 
 console.log("Starting . . .");
-app.listen(3000);
+app.listen(process.env.PORT);
