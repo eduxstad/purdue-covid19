@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/eduxstad/purdue-covid19/issues"
   },
-  "homepage": "https://github.com/eduxstad/purdue-covid19#readme"
+  "homepage": "https://github.com/eduxstad/purdue-covid19#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
