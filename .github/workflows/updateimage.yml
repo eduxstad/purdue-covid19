@@ -26,7 +26,7 @@ jobs:
         env:
           IMAGE_KEY: ${{ secrets.IMAGE_KEY }}
         run: |
-          wget -O image.png "https://api.apiflash.com/v1/urltoimage?access_key=${{ secrets.IMAGE_KEY }}&format=png&height=1500&url=https%3A%2F%2Feduxstad.github.io%2Fpurdue-covid19%2F&width=1020&fresh=true"
+          wget -O image.png "https://api.apiflash.com/v1/urltoimage?access_key=${{ secrets.IMAGE_KEY }}&format=png&height=1700&url=https%3A%2F%2Feduxstad.github.io%2Fpurdue-covid19%2F&width=1020&fresh=true"
           
           
       - uses: EndBug/add-and-commit@v4
