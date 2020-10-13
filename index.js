@@ -26,7 +26,7 @@ app.get('/signup', function (req, res) {
   return;
  }
  //check if the email is already on the list
- list.members().list(function (err, members) {
+ list.members(email).info(function (err, members) {
   console.log(err);
   console.log(members);
  });
