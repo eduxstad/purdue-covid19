@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 var crypto = require('crypto');
 var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
+var list = mailgun.lists('dashboard@purduecovid19.email');
 
 var requested = new Object();
 
@@ -25,6 +26,10 @@ app.get('/signup', function (req, res) {
   return;
  }
  //check if the email is already on the list
+ list.members().list(function (err, members) {
+  console.log(err);
+  console.log(members);
+ }
  //add the email and random key to the map
  key = crypto.randomBytes(48).toString('hex');
  requested[email] = key;
