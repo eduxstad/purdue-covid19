@@ -30,6 +30,7 @@ app.get('/signup', function (req, res) {
  requested[email] = key;
  //send the signup email
  //make sure to delete key after 15 minutes
+ setTimeout(() => {console.log("Deleting " + email); }, 2000);
  //redirect user to successful signup page
  console.log(crypto.randomBytes(48).toString('hex'));
  res.send("Succesfully requested " + email + ". Check your email to confirm the request.");
