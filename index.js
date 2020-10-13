@@ -27,9 +27,11 @@ app.get('/signup', function (req, res) {
  }
  //check if the email is already on the list
  var subscribed = false;
- list.members(email).info(function (err, member) {
-  console.log(member);
-  if (member.subscribed) {
+ list.members(email).info(function (err, members) {
+  console.log(members);
+  console.log(members.member);
+  console.log(members.member.subscribed);
+  if (members.member.subscribed) {
    subscribed = true;
   }
  });
