@@ -16,7 +16,8 @@ app.get('/signup', function (req, res) {
  //send the signup email and add the random key to the map
  //make sure to delete key after 15 minutes
  //redirect user to successful signup page
- res.send(email);
+ console.log(require('crypto').randomBytes(48).toString('hex'));
+ res.send("Succesfully signed up: " + email);
 });
 
 app.get('/confirm', function (req, res) {
