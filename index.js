@@ -32,7 +32,7 @@ app.get('/signup', function (req, res) {
  //make sure to delete key after 15 minutes
  //redirect user to successful signup page
  console.log(crypto.randomBytes(48).toString('hex'));
- res.send("Succesfully requested " + email ". Check your email to confirm the request.");
+ res.send("Succesfully requested " + email + ". Check your email to confirm the request.");
 });
 
 app.get('/confirm', function (req, res) {
