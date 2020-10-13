@@ -26,10 +26,17 @@ app.get('/signup', function (req, res) {
   return;
  }
  //check if the email is already on the list
- list.members(email).info(function (err, members) {
-  console.log(err);
-  console.log(members);
+ var subscribed = false;
+ list.members(email).info(function (err, member) {
+  console.log(member);
+  if (member.subscribed) {
+   subscribed = true;
+  }
  });
+ if (subscribed) {
+   res.send("The email address " + email + " is already subscribed to the list.");
+   return;
+ }
  //add the email and random key to the map
  key = crypto.randomBytes(48).toString('hex');
  requested[email] = key;
