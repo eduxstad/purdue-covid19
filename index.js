@@ -13,7 +13,10 @@ app.get('/', function (req, res) {
 app.get('/signup', function (req, res) {
  let email = req.query.email;
  //check if the request seems valid
- if (!validateEmail(email)) res.send("Invalid email (could not be validated): " + email); 
+ if (!validateEmail(email)) {
+  res.send("Invalid email (could not be validated): " + email);
+  return;
+ }
  //check if the email has already been requested
  //check if the email is already on the list
  //send the signup email and add the random key to the map
