@@ -3,8 +3,8 @@
 
 const express = require('express');
 const app = express();
-
 var crypto = require('crypto');
+var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
 
 var requested = new Object();
 
