@@ -6,24 +6,33 @@ const app = express();
 
 var crypto = require('crypto');
 
+var requested = new Object();
+
 app.get('/', function (req, res) {
  res.send('You seem to be a little lost . . . ');
 });
 
 app.get('/signup', function (req, res) {
  let email = req.query.email;
- //check if the request seems valid
+ //check if the request seems valid (potentially remove this)?
  if (!validateEmail(email)) {
-  res.send("Invalid email (could not be validated): " + email);
+  res.send("The email address " + email + " could not be validated. Please enter a valid email address.");
   return;
  }
  //check if the email has already been requested
+ if (requested[email] != null) {
+  res.send("The email address " + email + " has already been requested. Check your email to confirm the request.");
+  return;
+ }
  //check if the email is already on the list
- //send the signup email and add the random key to the map
+ //add the email and random key to the map
+ key = crypto.randomBytes(48).toString('hex');
+ requested[email] = key;
+ //send the signup email
  //make sure to delete key after 15 minutes
  //redirect user to successful signup page
  console.log(crypto.randomBytes(48).toString('hex'));
- res.send("Succesfully signed up: " + email);
+ res.send("Succesfully requested " + email ". Check your email to confirm the request.");
 });
 
 app.get('/confirm', function (req, res) {
