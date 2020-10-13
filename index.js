@@ -29,7 +29,7 @@ app.get('/signup', function (req, res) {
  list.members().list(function (err, members) {
   console.log(err);
   console.log(members);
- }
+ });
  //add the email and random key to the map
  key = crypto.randomBytes(48).toString('hex');
  requested[email] = key;
