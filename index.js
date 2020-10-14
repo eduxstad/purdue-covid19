@@ -13,7 +13,7 @@ app.get('/', function (req, res) {
  res.send('You seem to be a little lost . . . ');
 });
 
-app.get('/signup', function (req, res) {
+app.get('/signup', async function (req, res) {
  let email = req.query.email;
  //check if the request seems valid (potentially remove this)?
  if (!validateEmail(email)) {
