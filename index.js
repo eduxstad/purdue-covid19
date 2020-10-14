@@ -27,7 +27,7 @@ app.get('/signup', async function (req, res) {
  }
  //check if the email is already on the list
  var subscribed = false;
- list.members(email).info(function (err, members) {
+ await list.members(email).info(function (err, members) {
   console.log(members);
   console.log(members.member);
   console.log(members.member.subscribed);
