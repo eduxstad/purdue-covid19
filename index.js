@@ -30,13 +30,13 @@ app.get('/signup', async function (req, res) {
  await list.members(email).info().then(function (data) {
   subscribed = data.member.subscribed;
  }, function (err) {
-  console.log(err);
+  console.log(Error: err);
  });
- console.log("There should be a data or some error above");
+ 
  if (subscribed) {
    res.send("The email address " + email + " is already subscribed to the list.");
    return;
- }
+ } 
  //add the email and random key to the map
  key = crypto.randomBytes(48).toString('hex');
  requested[email] = key;
@@ -44,7 +44,6 @@ app.get('/signup', async function (req, res) {
  //make sure to delete key after 15 minutes
  setTimeout(() => {console.log("Removing " + email + " from requested emails"); requested[email] = null; }, 2000);
  //redirect user to successful signup page
- console.log(crypto.randomBytes(48).toString('hex'));
  res.send("Succesfully requested " + email + ". Check your email to confirm the request.");
 });
 
