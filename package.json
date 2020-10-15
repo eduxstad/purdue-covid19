@@ -19,6 +19,7 @@
   "homepage": "https://github.com/eduxstad/purdue-covid19#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mailgun-js": "^0.22.0"
+    "mailgun-js": "^0.22.0",
+    "promisify-call": "^2.0.4"
   }
 }
