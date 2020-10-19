@@ -29,7 +29,7 @@ app.get('/signup', async function (req, res) {
  //check if the email is already on the list
  var subscribed = false;
  await list.members(email).info().then(function (data) {
-  //subscribed = data.member.subscribed;
+  subscribed = data.member.subscribed;
  });
  if (subscribed) {
    res.send("The email address " + email + " is already subscribed to the list.");
@@ -66,6 +66,14 @@ app.get('/confirm', function (req, res) {
   return;
  }
  //add the user to the mailing list
+ var user = {
+  subscribed: true,
+  address: email,
+ };
+ list.members().create(user,function (error, data) {
+  console.log(data);
+  console.log(error);
+ });
  //redirect user to the confirm page
  res.send(email + " has been subscribed to the mailing list!");
 });
