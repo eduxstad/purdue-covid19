@@ -52,7 +52,7 @@ app.get('/signup', async function (req, res) {
   if (error) console.log(error);
  });
  //make sure to delete key after 15 minutes
- setTimeout(() => {console.log("Removing " + email + " from requested emails"); requested[email] = null; }, 10000);
+ setTimeout(() => {console.log("Removing " + email + " from requested emails"); requested[email] = null; }, 1200000);
  //redirect user to successful signup page
  res.send("Succesfully requested " + email + ". Check your email to confirm the request.");
 });
