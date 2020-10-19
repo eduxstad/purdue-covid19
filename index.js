@@ -38,6 +38,7 @@ app.get('/signup', async function (req, res) {
  //add the email and random key to the map
  key = crypto.randomBytes(48).toString('hex');
  requested[email] = key;
+ variables = '{"key": "' + key + '" }'
  //send the signup email
  const confirm_email = {
    from: "Purdue COVID-19 Dashboard <dashboard@purduecovid19.email>",
