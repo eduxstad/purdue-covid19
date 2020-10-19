@@ -38,14 +38,15 @@ app.get('/signup', async function (req, res) {
  //add the email and random key to the map
  key = crypto.randomBytes(48).toString('hex');
  requested[email] = key;
- variables = '{"key": "' + key + '" }'
+ variables = '{"key": "' + key + '" }';
+ console.log(variables);
  //send the signup email
  const confirm_email = {
    from: "Purdue COVID-19 Dashboard <dashboard@purduecovid19.email>",
    to: email,
    subject: "Confirm Purdue COVID-19 Dashboard Subscription",
    template: "confirm_dashboard",
-   'h:X-Mailgun-Variables': {"key": key}
+   'h:X-Mailgun-Variables': variables
  };
  mailgun.messages().send(confirm_email, function (error, body) {
   if (error) console.log(error);
