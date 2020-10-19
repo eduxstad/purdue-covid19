@@ -46,7 +46,7 @@ app.get('/signup', async function (req, res) {
    template: "confirm_dashboard",
    'h:X-Mailgun-Variables': {key: key}
  };
- mg.messages.send(confirm_email, function (error, body) {
+ mailgun.messages.send(confirm_email, function (error, body) {
   console.log(body);
   console.log(error);
  });
