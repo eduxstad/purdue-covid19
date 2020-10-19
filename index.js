@@ -38,7 +38,7 @@ app.get('/signup', async function (req, res) {
  //add the email and random key to the map
  key = crypto.randomBytes(24).toString('hex');
  requested[email] = key;
- variables = '{"key": "' + key + '", "email:" "' + email +'" }';
+ variables = '{"key": "' + key + '", "email": "' + email +'" }';
  console.log(variables);
  //send the signup email
  const confirm_email = {
