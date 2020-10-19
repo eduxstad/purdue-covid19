@@ -50,7 +50,7 @@ app.get('/signup', async function (req, res) {
  };
  mailgun.messages().send(confirm_email, function (error, body) {
   if (error) console.log(error);
- }).catch(error => console.log("Couldn't send confirm email"));
+ });
  //make sure to delete key after 15 minutes
  setTimeout(() => {console.log("Removing " + email + " from requested emails"); delete requested[email]; }, 1200000);
  //redirect user to successful signup page
@@ -72,7 +72,7 @@ app.get('/confirm', function (req, res) {
  };
  list.members().create(user,function (error, data) {
   if (error) console.log(error);
- }).catch(error => console.log("Couldn't create user"));
+ });
  //redirect user to the confirm page
  res.send(email + " has been subscribed to the mailing list!");
 });
