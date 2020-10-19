@@ -9,6 +9,7 @@ var list = mailgun.lists('dashboard@purduecovid19.email');
 
 var requested = new Object();
 
+
 app.get('/', function (req, res) {
  res.send('You seem to be a little lost . . . ');
 });
@@ -28,7 +29,7 @@ app.get('/signup', async function (req, res) {
  //check if the email is already on the list
  var subscribed = false;
  await list.members(email).info().then(function (data) {
-  subscribed = data.member.subscribed;
+  //subscribed = data.member.subscribed;
  });
  if (subscribed) {
    res.send("The email address " + email + " is already subscribed to the list.");
@@ -38,8 +39,19 @@ app.get('/signup', async function (req, res) {
  key = crypto.randomBytes(48).toString('hex');
  requested[email] = key;
  //send the signup email
+ const confirm_email = {
+   from: "Purdue COVID-19 Dashboard <dashboard@purduecovid19.email>",
+   to: email,
+   subject: "Confirm Purdue COVID-19 Dashboard Subscription",
+   template: "confirm_dashboard",
+   'h:X-Mailgun-Variables': {key: key}
+ };
+ mg.messages.send(confirm_email, function (error, body) {
+  console.log(body);
+  console.log(error);
+ });
  //make sure to delete key after 15 minutes
- setTimeout(() => {console.log("Removing " + email + " from requested emails"); requested[email] = null; }, 2000);
+ setTimeout(() => {console.log("Removing " + email + " from requested emails"); requested[email] = null; }, 10000);
  //redirect user to successful signup page
  res.send("Succesfully requested " + email + ". Check your email to confirm the request.");
 });
