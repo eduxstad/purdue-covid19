@@ -45,11 +45,11 @@ app.get('/signup', async function (req, res) {
 });
 
 app.get('/confirm', function (req, res) {
- let email = req.query.email;
+ let key = req.query.key;
  //check if the request matches the random key
  //add the user to the mailing list
  //redirect user to the confirm page
- res.send(email);
+ res.send("Your key was " + key);
 });
 
 //amazing function from: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
