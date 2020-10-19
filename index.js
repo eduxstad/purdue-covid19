@@ -30,7 +30,7 @@ app.get('/signup', async function (req, res) {
  var subscribed = false;
  await list.members(email).info().then(function (data) {
   subscribed = data.member.subscribed;
- }).catch(error => console.log(error));
+ }).catch(error => console.log("Couldn't poll member.")); //fail gracefully if not found on list
  if (subscribed) {
    res.send("The email address " + email + " is already subscribed to the list.");
    return;
@@ -50,7 +50,7 @@ app.get('/signup', async function (req, res) {
  };
  mailgun.messages().send(confirm_email, function (error, body) {
   if (error) console.log(error);
- });
+ }).catch(error => console.log("Couldn't send confirm email"));
  //make sure to delete key after 15 minutes
  setTimeout(() => {console.log("Removing " + email + " from requested emails"); requested[email] = null; }, 1200000);
  //redirect user to successful signup page
@@ -62,7 +62,7 @@ app.get('/confirm', function (req, res) {
  let email = req.query.email;
  //check if the request matches the random key
  if ( requested[email] != key ) {
-  res.send("We couldn't find that email address in our records, maybe try again?"); 
+  res.send("We couldn't complete the request, please try signing up again."); 
   return;
  }
  //add the user to the mailing list
@@ -71,9 +71,9 @@ app.get('/confirm', function (req, res) {
   address: email,
  };
  list.members().create(user,function (error, data) {
-  console.log(data);
-  console.log(error);
- });
+  if (error) console.log(error);
+ }).catch(error => console.log("Couldn't create user"));
+ delete requested[email];
  //redirect user to the confirm page
  res.send(email + " has been subscribed to the mailing list!");
 });
