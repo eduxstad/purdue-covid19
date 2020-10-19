@@ -30,7 +30,7 @@ app.get('/signup', async function (req, res) {
  var subscribed = false;
  await list.members(email).info().then(function (data) {
   subscribed = data.member.subscribed;
- });
+ }).catch(error => console.log(error));
  if (subscribed) {
    res.send("The email address " + email + " is already subscribed to the list.");
    return;
