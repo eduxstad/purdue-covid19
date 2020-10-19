@@ -73,7 +73,6 @@ app.get('/confirm', function (req, res) {
  list.members().create(user,function (error, data) {
   if (error) console.log(error);
  }).catch(error => console.log("Couldn't create user"));
- delete requested[email];
  //redirect user to the confirm page
  res.send(email + " has been subscribed to the mailing list!");
 });
