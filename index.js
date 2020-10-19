@@ -44,11 +44,10 @@ app.get('/signup', async function (req, res) {
    to: email,
    subject: "Confirm Purdue COVID-19 Dashboard Subscription",
    template: "confirm_dashboard",
-   'h:X-Mailgun-Variables': {key: key}
+   'h:X-Mailgun-Variables': {"key": key}
  };
  mailgun.messages().send(confirm_email, function (error, body) {
-  console.log(body);
-  console.log(error);
+  if (error) console.log(error);
  });
  //make sure to delete key after 15 minutes
  setTimeout(() => {console.log("Removing " + email + " from requested emails"); requested[email] = null; }, 10000);
