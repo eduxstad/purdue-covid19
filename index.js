@@ -36,9 +36,9 @@ app.get('/signup', async function (req, res) {
    return;
  } 
  //add the email and random key to the map
- key = crypto.randomBytes(48).toString('hex');
+ key = crypto.randomBytes(24).toString('hex');
  requested[email] = key;
- variables = '{"key": "' + key + '" }';
+ variables = '{"key": "' + key + '", "email:" "' + email +'" }';
  console.log(variables);
  //send the signup email
  const confirm_email = {
@@ -59,10 +59,15 @@ app.get('/signup', async function (req, res) {
 
 app.get('/confirm', function (req, res) {
  let key = req.query.key;
+ let email = req.query.email;
  //check if the request matches the random key
+ if ( requested[email] != key ) {
+  res.send("We couldn't find that email address in our records, maybe try again?"); 
+  return;
+ }
  //add the user to the mailing list
  //redirect user to the confirm page
- res.send("Your key was " + key);
+ res.send(email + " has been subscribed to the mailing list!");
 });
 
 //amazing function from: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
