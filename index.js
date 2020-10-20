@@ -4,15 +4,13 @@
 const express = require('express');
 const app = express();
 var crypto = require('crypto');
-var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
-var list = mailgun.lists('dashboard@purduecovid19.email');
+//var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
+//var list = mailgun.lists('dashboard@purduecovid19.email');
 
 var requested = new Object();
 
-
-app.get('/', function (req, res) {
- res.send('You seem to be a little lost . . . ');
-});
+//setup main page
+app.use('/', express.static('index'));
 
 app.get('/signup', async function (req, res) {
  let email = req.query.email;
@@ -83,5 +81,5 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 4040); //use port 4040 if env port is not specified
 console.log("Started Server");
