@@ -4,8 +4,8 @@
 const express = require('express');
 const app = express();
 var crypto = require('crypto');
-//var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
-//var list = mailgun.lists('dashboard@purduecovid19.email');
+var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
+var list = mailgun.lists('dashboard@purduecovid19.email');
 
 var mainUrl = "https://purduecovid19.herokuapp.com/";
 
