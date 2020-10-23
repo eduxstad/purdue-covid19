@@ -24,7 +24,7 @@ app.get('/signup', async function (req, res) {
  //check if the email has already been requested
  if (requested[email] != null) {
   //res.send("The email address " + email + " has already been requested. Check your email to confirm the request.");
-  res.redirect(mainUrl + "The email address " + email + " has already been requested. Check your email to confirm the request.");
+  res.redirect(mainUrl + "?message=" + "The email address " + email + " has already been requested. Check your email to confirm the request.");
   return;
  }
  //check if the email is already on the list
