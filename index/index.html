@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact V3</title>
+	<title>Purdue COVID-19 Dashboard Emails</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -13,9 +13,18 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+	<link href="vendor/tailwind/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-
+	<div class="alert-banner w-full fixed top-0">
+		<input type="checkbox" class="hidden" id="banneralert" checked>
+        	<label class="close cursor-pointer flex items-center justify-between w-full p-2 shadow text-white banner" id="bannerlabel" title="close" for="banneralert">
+      		Banner Alert (click anywhere to close)
+      		<svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+        	<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+      		</svg>
+    	</label>
+  	</div>
 	<div class="bg-contact3" style="background-image: url('images/bg-01.jpg');">
 		<div class="container-contact3">
 			<div class="wrap-contact3">
