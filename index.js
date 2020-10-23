@@ -7,6 +7,8 @@ var crypto = require('crypto');
 //var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
 //var list = mailgun.lists('dashboard@purduecovid19.email');
 
+var mainUrl = "https://purduecovid19.herokuapp.com/";
+
 var requested = new Object();
 
 //setup main page
@@ -21,7 +23,8 @@ app.get('/signup', async function (req, res) {
  }
  //check if the email has already been requested
  if (requested[email] != null) {
-  res.send("The email address " + email + " has already been requested. Check your email to confirm the request.");
+  //res.send("The email address " + email + " has already been requested. Check your email to confirm the request.");
+  res.redirect(mainUrl + "The email address " + email + " has already been requested. Check your email to confirm the request.");
   return;
  }
  //check if the email is already on the list
