@@ -10,20 +10,22 @@
   font-size: 1.3rem;
   font-weight: 500;
 }
-::-webkit-input-placeholder { /* Edge */
-  color: red;
+.input3::-webkit-input-placeholder { /* Edge */
+  color: white;
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: red;
+  color: white;
 }
 
-::-moz-placeholder {
-  color: red;
+.input3::-moz-placeholder {
+  color: white;
 }
 
-input::placeholder {
-  color: red;
+.input3::placeholder {
+  color: white;
+  font-size: 18px;
+  opacity: 0.9;
 }
 /*Built-in Banner*/
 .alert-banner {
