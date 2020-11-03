@@ -80,5 +80,5 @@ message = urlParams.get('message');
 console.log(message);
 if(message) {
     document.getElementById('banneralert').checked = false;
-    document.getElementById('bannerlabel').innerHTML = "message" + labelhtml;
+    document.getElementById('bannerlabel').innerHTML = message + labelhtml;
 }

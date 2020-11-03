@@ -4,8 +4,10 @@
 const express = require('express');
 const app = express();
 var crypto = require('crypto');
-//var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
-//var list = mailgun.lists('dashboard@purduecovid19.email');
+var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
+var list = mailgun.lists('dashboard@purduecovid19.email');
+
+var mainUrl = "https://purduecovid19.herokuapp.com/";
 
 var requested = new Object();
 
@@ -16,12 +18,13 @@ app.get('/signup', async function (req, res) {
  let email = req.query.email;
  //check if the request seems valid (potentially remove this)?
  if (!validateEmail(email)) {
-  res.send("The email address " + email + " could not be validated. Please enter a valid email address.");
+  res.redirect(mainUrl + "?message=" + "The email address " + email + " could not be validated. Please enter a valid email address.");
   return;
  }
  //check if the email has already been requested
  if (requested[email] != null) {
-  res.send("The email address " + email + " has already been requested. Check your email to confirm the request.");
+  //res.send("The email address " + email + " has already been requested. Check your email to confirm the request.");
+  res.redirect(mainUrl + "?message=" + "The email address " + email + " has already been requested. Check your email to confirm the request.");
   return;
  }
  //check if the email is already on the list
@@ -30,14 +33,14 @@ app.get('/signup', async function (req, res) {
   subscribed = data.member.subscribed;
  }).catch(error => console.log("Couldn't poll member.")); //fail gracefully if not found on list
  if (subscribed) {
-   res.send("The email address " + email + " is already subscribed to the list.");
+   res.redirect(mainUrl + "?message=" + "The email address " + email + " is already subscribed to the list.");
    return;
  } 
  //add the email and random key to the map
  key = crypto.randomBytes(24).toString('hex');
  requested[email] = key;
  variables = '{"key": "' + key + '", "email": "' + email +'" }';
- console.log(variables);
+ //console.log(variables);
  //send the signup email
  const confirm_email = {
    from: "Purdue COVID-19 Dashboard <dashboard@purduecovid19.email>",
@@ -52,7 +55,7 @@ app.get('/signup', async function (req, res) {
  //make sure to delete key after 15 minutes
  setTimeout(() => {console.log("Removing " + email + " from requested emails"); delete requested[email]; }, 1200000);
  //redirect user to successful signup page
- res.send("Succesfully requested " + email + ". Check your email to confirm the request.");
+ res.redirect(mainUrl + "?message=" + "Succesfully requested " + email + ". Check your email to confirm the request.");
 });
 
 app.get('/confirm', function (req, res) {
@@ -60,7 +63,7 @@ app.get('/confirm', function (req, res) {
  let email = req.query.email;
  //check if the request matches the random key
  if ( requested[email] != key ) {
-  res.send("We couldn't complete the request, please try signing up again."); 
+  res.redirect(mainUrl + "?message=" + "We couldn't complete the request, please try signing up again."); 
   return;
  }
  //add the user to the mailing list
@@ -72,7 +75,7 @@ app.get('/confirm', function (req, res) {
   if (error) console.log(error);
  });
  //redirect user to the confirm page
- res.send(email + " has been subscribed to the mailing list!");
+ res.redirect(mainUrl + "?message=" + email + " has been subscribed to the mailing list!");
 });
 
 //amazing function from: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
