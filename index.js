@@ -7,7 +7,7 @@ var crypto = require('crypto');
 var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
 var list = mailgun.lists('dashboard@purduecovid19.email');
 
-var mainUrl = "https://purduecovid19.email/";
+var mainUrl = "http://purduecovid19.email/";
 
 var requested = new Object();
 
