@@ -7,7 +7,7 @@ var crypto = require('crypto');
 var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
 var list = mailgun.lists('dashboard@purduecovid19.email');
 
-var mainUrl = "http://purduecovid19.email/";
+var mainUrl = "https://purduecovid19.email/";
 var dashboardUrl = "https://tableau.itap.purdue.edu/t/public/views/COVIDPublicDashboard/Testing?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Ftableau.itap.purdue.edu%2F&:embed_code_version=3&:tabs=no&:toolbar=no&:iid=4&:isGuestRedirectFromVizportal=y&:display_spinner=no&:loadOrderID=0"
 
 var requested = new Object();
