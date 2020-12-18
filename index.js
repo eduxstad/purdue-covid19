@@ -8,6 +8,7 @@ var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "p
 var list = mailgun.lists('dashboard@purduecovid19.email');
 
 var mainUrl = "http://purduecovid19.email/";
+var dashboardUrl = "https://tableau.itap.purdue.edu/t/public/views/COVIDPublicDashboard/Testing?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Ftableau.itap.purdue.edu%2F&:embed_code_version=3&:tabs=no&:toolbar=no&:iid=4&:isGuestRedirectFromVizportal=y&:display_spinner=no&:loadOrderID=0"
 
 var requested = new Object();
 
@@ -77,6 +78,11 @@ app.get('/confirm', function (req, res) {
  //redirect user to the confirm page
  res.redirect(mainUrl + "?message=" + email + " has been subscribed to the mailing list!");
 });
+
+app.get('/dashboard', async function (req, res) {
+ res.redirect(dashboardUrl);
+ return;
+}
 
 //amazing function from: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 function validateEmail(email) {
