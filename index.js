@@ -82,7 +82,7 @@ app.get('/confirm', function (req, res) {
 app.get('/dashboard', async function (req, res) {
  res.redirect(dashboardUrl);
  return;
-}
+});
 
 //amazing function from: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 function validateEmail(email) {
