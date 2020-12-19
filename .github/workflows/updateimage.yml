@@ -25,11 +25,11 @@ jobs:
         run: |
           wget -O image.png "https://api.apiflash.com/v1/urltoimage?access_key=${{ secrets.IMAGE_KEY }}&url=https%3A%2F%2Fpurduecovid19.email%2Fdashboard&format=png&width=1020&height=1700&fresh=true&delay=10"
           
-      - uses: EndBug/add-and-commit@v4
+      - uses: EndBug/add-and-commit@v5
         with:
           author_name: Erik Duxstad
           author_email: eduxstad@gmail.com
-          message: "update image file"
+          message: "update dashboard image"
           add: "image.png"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
