@@ -73,7 +73,13 @@ app.get('/confirm', function (req, res) {
   address: email,
  };
  list.members().create(user,function (error, data) {
-  if (error) console.log(error);
+  if (error) { //member already exists, just update the subscribed var
+   console.log(error);
+   list.members(user.address).update(user), function (error, data) {
+    if (error) console.log(error);
+    console.log(data);
+   });
+  }
  });
  //redirect user to the confirm page
  res.redirect(mainUrl + "?message=" + email + " has been subscribed to the mailing list!");
