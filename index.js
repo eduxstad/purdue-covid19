@@ -77,7 +77,6 @@ app.get('/confirm', function (req, res) {
    console.log(error);
    list.members(user.address).update(user, function (error, data) {
     if (error) console.log(error);
-    console.log(data);
    });
   }
  });
