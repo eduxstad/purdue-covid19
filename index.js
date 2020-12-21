@@ -75,7 +75,7 @@ app.get('/confirm', function (req, res) {
  list.members().create(user,function (error, data) {
   if (error) { //member already exists, just update the subscribed var
    console.log(error);
-   list.members(user.address).update(user), function (error, data) {
+   list.members(user.address).update(user, function (error, data) {
     if (error) console.log(error);
     console.log(data);
    });
