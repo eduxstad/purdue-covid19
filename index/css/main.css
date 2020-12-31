@@ -196,7 +196,7 @@ iframe {
   background: linear-gradient(45deg, #DDB945, #CFB991);
   border-radius: 10px;
   overflow: hidden;
-  padding: 72px 55px 65px 55px;
+  padding: 72px 55px 35px 55px;
 }
 
 
@@ -222,6 +222,16 @@ iframe {
 
 /*------------------------------------------------------------------
 [  ]*/
+
+.footer {
+	margin-top: 20px;
+	color: white;
+	opacity: 85%;
+}
+
+.footer-link {
+	font-size: 14px;
+}
 
 .wrap-input3 {
   width: 100%;
