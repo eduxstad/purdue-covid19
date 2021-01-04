@@ -6,7 +6,7 @@ const app = express();
 var crypto = require('crypto');
 var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
 var list = mailgun.lists('dashboard@purduecovid19.email');
-var weekly = mailgun.lists('weeklydashboard@purduedovid19.email');
+var weekly = mailgun.lists('weeklydashboard@purduecovid19.email');
 
 var mainUrl = "https://purduecovid19.email/";
 var dashboardUrl = "https://tableau.itap.purdue.edu/t/public/views/COVIDPublicDashboard/Testing?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Ftableau.itap.purdue.edu%2F&:embed_code_version=3&:tabs=no&:toolbar=no&:iid=4&:isGuestRedirectFromVizportal=y&:display_spinner=no&:loadOrderID=0"
@@ -72,7 +72,10 @@ app.get('/signup', async function (req, res) {
     if (error) console.log(error);
   });
   //make sure to delete key after 15 minutes
-  setTimeout(() => {console.log("Removing " + email + " from requested emails"); delete requested[email]; }, 1200000);
+  setTimeout(() => {
+    console.log("Removing " + email + " from requested emails"); 
+    if (requested[email] != null) { delete requested[email]; } 
+  }, 1200000);
   //redirect user to successful signup page
   res.redirect(mainUrl + "?message=" + "Succesfully requested " + email + ". Check your email to confirm the request.");
 });
@@ -118,6 +121,8 @@ app.get('/confirm', function (req, res) {
     default:
       res.redirect(mainUrl + "?message=" + "Invalid list. You can try signing up again.");
   }
+  //cleanup email for another request
+  delete requested[email];
 });
 
 app.get('/dashboard', async function (req, res) {
