@@ -1,0 +1,31 @@
+# This is a basic workflow that is manually triggered
+
+name: Send dashboard weekly update email
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+  schedule:
+  - cron: '0 9 * * 0'
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  email:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: Send email
+      env:
+        EMAIL_KEY: ${{ secrets.EMAIL_KEY }} 
+      run: |
+        CURRENTDATE=`date +"%m-%d-%y"`
+        SUBJECT="Purdue COVID-19 Dashboard ${CURRENTDATE}"
+        echo "$SUBJECT"
+        curl -s --user 'api:${{ secrets.EMAIL_KEY }}' https://api.mailgun.net/v3/purduecovid19.email/messages -F from='Purdue COVID-19 Dashboard <weeklydashboard@purduecovid19.email>' -F to='weeklydashboard@purduecovid19.email' -F subject="$SUBJECT" -F text='Purdue COVID-19 Dashboard Update' -F template='dashboard'

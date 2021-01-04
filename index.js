@@ -9,7 +9,7 @@ var list = mailgun.lists('dashboard@purduecovid19.email');
 var weekly = mailgun.lists('weeklydashboard@purduecovid19.email');
 
 var mainUrl = "https://purduecovid19.email/";
-var dashboardUrl = "https://tableau.itap.purdue.edu/t/public/views/COVIDPublicDashboard/Testing?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Ftableau.itap.purdue.edu%2F&:embed_code_version=3&:tabs=no&:toolbar=no&:iid=4&:isGuestRedirectFromVizportal=y&:display_spinner=no&:loadOrderID=0"
+var dashboardUrl = "https://tableau.itap.purdue.edu/t/public/views/COVIDPublicDashboard/Testing?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Ftableau.itap.purdue.edu%2F&:embed_code_version=3&:tabs=no&:toolbar=no&:iid=4&:isGuestRedirectFromVizportal=y&:display_spinner=no&:loadOrderID=0";
 
 var requested = new Object();
 
@@ -104,7 +104,7 @@ app.get('/confirm', function (req, res) {
         }
       });
       //redirect user to the confirm page
-      res.redirect(mainUrl + "?message=" + email + " has been subscribed to the mailing list!");
+      res.redirect(mainUrl + "?message=" + email + " has been subscribed to the daily mailing list!");
       break;
     case 'weekly':
       weekly.members().create(user,function (error, data) {
@@ -116,7 +116,7 @@ app.get('/confirm', function (req, res) {
         }
       });
       //redirect user to the confirm page
-      res.redirect(mainUrl + "?message=" + email + " has been subscribed to the mailing list!");
+      res.redirect(mainUrl + "?message=" + email + " has been subscribed to the weekly mailing list!");
       break;
     default:
       res.redirect(mainUrl + "?message=" + "Invalid list. You can try signing up again.");
