@@ -32,7 +32,7 @@ app.get('/signup', async function (req, res) {
   }
   //check if the email is already on the list
   var subscribed = false;
-  if (list == 'daily') {
+  if (listChoice == 'daily') {
     await list.members(email).info().then(function (data) {
       subscribed = data.member.subscribed;
     }).catch(error => console.log("Couldn't poll member.")); //fail gracefully if not found on list
@@ -40,7 +40,7 @@ app.get('/signup', async function (req, res) {
       res.redirect(mainUrl + "?message=" + "The email address " + email + " is already subscribed to the list.");
       return;
     } 
-  } else if (list == 'weekly') {
+  } else if (listChoice == 'weekly') {
     await weekly.members(email).info().then(function (data) {
       subscribed = data.member.subscribed;
     }).catch(error => console.log("Couldn't poll member.")); //fail gracefully if not found on list
