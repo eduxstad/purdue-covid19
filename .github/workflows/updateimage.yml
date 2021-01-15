@@ -29,6 +29,7 @@ jobs:
         with:
           author_name: Erik Duxstad
           author_email: eduxstad@gmail.com
+          branch: images
           message: "update dashboard image"
           add: "image.png"
         env:
