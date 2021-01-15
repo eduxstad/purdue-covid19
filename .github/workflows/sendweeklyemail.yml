@@ -28,4 +28,4 @@ jobs:
         CURRENTDATE=`date +"%m-%d-%y"`
         SUBJECT="Purdue COVID-19 Dashboard ${CURRENTDATE}"
         echo "$SUBJECT"
-        curl -s --user 'api:${{ secrets.EMAIL_KEY }}' https://api.mailgun.net/v3/purduecovid19.email/messages -F from='Purdue COVID-19 Dashboard <weeklydashboard@purduecovid19.email>' -F to='weeklydashboard@purduecovid19.email' -F subject="$SUBJECT" -F text='Purdue COVID-19 Dashboard Update' -F template='dashboard'
+        curl -s --user 'api:${{ secrets.EMAIL_KEY }}' https://api.mailgun.net/v3/boilerdashboard.net/messages -F from='Purdue COVID-19 Dashboard <weekly@boilerdashboard.net>' -F to='weekly@boilerdashboard.net' -F subject="$SUBJECT" -F text='Purdue COVID-19 Dashboard Update' -F template='dashboard'
