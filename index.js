@@ -5,10 +5,10 @@ const express = require('express');
 const app = express();
 var crypto = require('crypto');
 var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "purduecovid19.email"});
-var list = mailgun.lists('dashboard@purduecovid19.email');
-var weekly = mailgun.lists('weeklydashboard@purduecovid19.email');
+var list = mailgun.lists('daily@boilerdashboard.net');
+var weekly = mailgun.lists('weekly@boilerdashboard.net');
 
-var mainUrl = "https://purduecovid19.email/";
+var mainUrl = "https://boilerdashboard.net/";
 var dashboardUrl = "https://tableau.itap.purdue.edu/t/public/views/COVIDPublicDashboard/Testing?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Ftableau.itap.purdue.edu%2F&:embed_code_version=3&:tabs=no&:toolbar=no&:iid=4&:isGuestRedirectFromVizportal=y&:display_spinner=no&:loadOrderID=0";
 
 var requested = new Object();
@@ -59,7 +59,7 @@ app.get('/signup', async function (req, res) {
   //console.log(variables);
   //send the signup email
   let confirm_email = {
-    from: "Purdue COVID-19 Dashboard <dashboard@purduecovid19.email>",
+    from: "Purdue COVID-19 Dashboard <dashboard@boilerdashboard.net>",
     to: email,
     subject: "Confirm Purdue COVID-19 Dashboard Subscription",
     template: "confirm_dashboard",
@@ -71,11 +71,11 @@ app.get('/signup', async function (req, res) {
   mailgun.messages().send(confirm_email, function (error, body) {
     if (error) console.log(error);
   });
-  //make sure to delete key after 15 minutes
+  //make sure to delete key after 30 minutes
   setTimeout(() => {
     console.log("Removing " + email + " from requested emails"); 
     if (requested[email] != null) { delete requested[email]; } 
-  }, 1200000);
+  }, 2400000);
   //redirect user to successful signup page
   res.redirect(mainUrl + "?message=" + "Succesfully requested " + email + ". Check your email to confirm the request.");
 });
