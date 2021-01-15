@@ -71,11 +71,11 @@ app.get('/signup', async function (req, res) {
   mailgun.messages().send(confirm_email, function (error, body) {
     if (error) console.log(error);
   });
-  //make sure to delete key after 30 minutes
+  //make sure to delete key after 2 hours
   setTimeout(() => {
     console.log("Removing " + email + " from requested emails"); 
     if (requested[email] != null) { delete requested[email]; } 
-  }, 2400000);
+  }, 7200000);
   //redirect user to successful signup page
   res.redirect(mainUrl + "?message=" + "Succesfully requested " + email + ". Check your email to confirm the request.");
 });
