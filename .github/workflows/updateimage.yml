@@ -32,6 +32,6 @@ jobs:
           branch: images
           message: "update dashboard image"
           add: "image.png"
-          push: origin images --force
+          push: "origin images --force"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
