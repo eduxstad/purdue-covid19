@@ -17,6 +17,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          ref: images
       
       # Runs a set of commands using the runners shell
       - name: Download and commit a fresh dashboard image
@@ -32,6 +34,5 @@ jobs:
           branch: images
           message: "update dashboard image"
           add: "image.png"
-          pull_strategy: '--rebase'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
