@@ -5,7 +5,7 @@
 const express = require('express');
 const app = express();
 var crypto = require('crypto');
-var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_KEY, domain: "boilerdashboard.net"});
+var mailgun = require('mailgun-js')({apiKey: (process.env.MAILGUN_KEY || 'null'), domain: "boilerdashboard.net"});
 var list = mailgun.lists('daily@boilerdashboard.net');
 var weekly = mailgun.lists('weekly@boilerdashboard.net');
 
